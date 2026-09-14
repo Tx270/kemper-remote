@@ -57,9 +57,10 @@ void menuCore_update() {
         uiState = UI_HOME;
         homeScreen_draw();
     }
-    
-    if (uiState == UI_HOME && now - lastHomeDraw >= 500) {
-        lastHomeDraw = now;
-        homeScreen_draw();
-    }
+
+    // will query kemper for info to display
+    // if (uiState == UI_HOME && now - lastHomeDraw >= 500) {
+    //     lastHomeDraw = now;
+    //     homeScreen_draw();
+    // }
 }

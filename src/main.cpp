@@ -2,6 +2,8 @@
 #include "hal/display_driver.h"
 #include "menu/menu_core.h"
 #include "menu/menu_root.h"
+#include "menu/menu_buttons.h"
+#include "menu/menu_button_1.h"
 
 
 void setup() {
@@ -10,6 +12,8 @@ void setup() {
 
     displayDriver_init();
 
+    button1Menu_init();
+    buttonsMenu_init();
     rootMenu_init();
 
     menuCore_init();
