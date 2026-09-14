@@ -1,0 +1,6 @@
+CompileFlags:
+  Remove:
+    - "-mlongcalls"
+    - "-fstrict-volatile-bitfields"
+    - "-fno-tree-switch-conversion"
+    - "--target=xtensa-esp32s3-elf"
