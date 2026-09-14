@@ -2,17 +2,29 @@
 #include "app_state.h"
 #include <Arduino.h>
 
-void buttonsMenuController_onButton1FunctionIndexChanged() {
-    Serial.print(F("Button1 func set to: "));
-    Serial.println(appState.button1FunctionIndex);
+void buttonsMenuController_onFunctionChanged(GEMCallbackData callbackData) {
+    byte idx = callbackData.valByte;
+
+    Serial.print(F("Button "));
+    Serial.print(idx + 1);
+    Serial.print(F(" function set to: "));
+    Serial.println(appState.buttons[idx].functionIndex);
 }
 
-void buttonsMenuController_onButton1MomentaryChanged() {
-    Serial.print(F("Button1 momentary set to: "));
-    Serial.println(appState.button1Momentary);
+void buttonsMenuController_onMomentaryChanged(GEMCallbackData callbackData) {
+    byte idx = callbackData.valByte;
+
+    Serial.print(F("Button "));
+    Serial.print(idx + 1);
+    Serial.print(F(" momentary set to: "));
+    Serial.println(appState.buttons[idx].momentary);
 }
 
-void buttonsMenuController_onButton1TimeChanged() {
-    Serial.print(F("Button1 time set to: "));
-    Serial.println(appState.button1Time);
+void buttonsMenuController_onTimeChanged(GEMCallbackData callbackData) {
+    byte idx = callbackData.valByte;
+
+    Serial.print(F("Button "));
+    Serial.print(idx + 1);
+    Serial.print(F(" time set to: "));
+    Serial.println(appState.buttons[idx].time);
 }

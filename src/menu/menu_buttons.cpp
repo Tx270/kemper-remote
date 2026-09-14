@@ -1,11 +1,18 @@
 #include "menu_buttons.h"
 #include "menu_root.h"
-#include "menu_button_1.h"
+#include "menu_button_page.h"
+#include "../app/app_state.h"
+#include <stdio.h>
 
 GEMPage pageButtons("Choose button to edit", pageRoot);
 
-GEMItem itemGoButton1("Button 1", pageButton1);
+static char linkTitle[NUM_BUTTONS][12];
 
 void buttonsMenu_init() {
-    pageButtons.addMenuItem(itemGoButton1);
+    for (byte i = 0; i < NUM_BUTTONS; i++) {
+        snprintf(linkTitle[i], sizeof(linkTitle[i]), "Button %d", i + 1);
+
+        GEMItem* itemGoButton = new GEMItem(linkTitle[i], *pageButtonEdit[i]);
+        pageButtons.addMenuItem(*itemGoButton);
+    }
 }
