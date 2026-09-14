@@ -12,8 +12,10 @@ enum UiState { UI_HOME, UI_MENU };
 
 static UiState uiState = UI_HOME;
 static unsigned long lastActivityTime = 0;
+static unsigned long lastHomeDraw = 0;
 
 void menuCore_init() {
+    gem.setSplashDelay(0);
     gem.init();
     gem.invertKeysDuringEdit(true); // invert input for rotary encoder
 
@@ -55,13 +57,9 @@ void menuCore_update() {
         uiState = UI_HOME;
         homeScreen_draw();
     }
-
-    // To make the home screen show live-updating content later (a
-    // clock, sensor readings, etc.), add a throttled redraw here, e.g.:
-    //
-    //   static unsigned long lastHomeDraw = 0;
-    //   if (uiState == UI_HOME && now - lastHomeDraw >= 1000) {
-    //       lastHomeDraw = now;
-    //       homeScreen_draw();
-    //   }
+    
+    if (uiState == UI_HOME && now - lastHomeDraw >= 500) {
+        lastHomeDraw = now;
+        homeScreen_draw();
+    }
 }
