@@ -6,7 +6,7 @@ Bounce buttons[NUM_BUTTONS];
 
 void buttons_init() {
     for (byte i = 0; i < NUM_BUTTONS; i++) {
-        buttons[i].attach(buttonPins[i], INPUT_PULLUP);
+        buttons[i].attach(BUTTON_PINS[i], INPUT_PULLUP);
         buttons[i].interval(30);
     }
 }

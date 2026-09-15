@@ -11,7 +11,7 @@ struct ButtonConfig {
 struct AppState {
     ButtonConfig buttons[NUM_BUTTONS];
 
-    byte brightness    = 128;
+    byte brightness    = 50;
     bool acceptUpdates = false;
     bool enableWifi    = false;
 };
