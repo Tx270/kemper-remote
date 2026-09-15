@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "app/settings_controller.h"
 #include "hal/display_driver.h"
 #include "hal/buttons.h"
 #include "app/button_action_controller.h"
@@ -19,6 +20,9 @@ void setup() {
     buttonsMenu_init();   // links to each pageButtonEdit[i]
     rootMenu_init();      // links to pageButtons
     menuCore_init();      // actual menu logic and drawing
+    
+    // disable or enable wifi
+    settingsController_onEnableWifiChanged();
 }
 
 void loop() {
