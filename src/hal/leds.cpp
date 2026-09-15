@@ -1,6 +1,7 @@
 #include "leds.h"
 #include "app/app_state.h"
 #include "pins.h"
+#include "../config.h"
 #include <Adafruit_NeoPixel.h>
 
 Adafruit_NeoPixel leds(
@@ -18,6 +19,8 @@ void leds_init() {
 
 void leds_set(byte index, byte red, byte green, byte blue)
 {
+    if (!HAS_LEDS) return;
+    
     if (index >= NUM_LEDS) {
         return;
     }
@@ -28,6 +31,8 @@ void leds_set(byte index, byte red, byte green, byte blue)
 
 void leds_setAll(byte red, byte green, byte blue)
 {
+    if (!HAS_LEDS) return;
+    
     for (byte i = 0; i < NUM_LEDS; i++) {
         leds.setPixelColor(i, leds.Color(red, green, blue));
     }
@@ -36,6 +41,8 @@ void leds_setAll(byte red, byte green, byte blue)
 }
 
 void leds_setBrightness(byte brightness){
-    leds.setBrightness(appState.brightness);
+    if (!HAS_LEDS) return;
+    
+    leds.setBrightness(brightness);
     leds.show();
 }

@@ -1,6 +1,7 @@
 #include "menu_button_page.h"
+#include "app/app_state.h"
+#include "app/buttons_menu_controller.h"
 #include "menu_buttons.h"
-#include "../app/buttons_menu_controller.h"
 #include <stdio.h>
 
 GEMPage* pageButtonEdit[NUM_BUTTONS];

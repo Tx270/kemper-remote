@@ -1,12 +1,11 @@
 #pragma once
-#include "../hal/pins.h"
+#include "config.h"
 
 struct ButtonConfig {
     byte functionIndex  = 0;
     bool momentary      = false;
     byte time           = 0;
 };
-
 
 struct AppState {
     ButtonConfig buttons[NUM_BUTTONS];

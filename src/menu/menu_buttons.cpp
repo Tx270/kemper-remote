@@ -1,7 +1,7 @@
 #include "menu_buttons.h"
 #include "menu_root.h"
 #include "menu_button_page.h"
-#include "../app/app_state.h"
+#include "config.h"
 #include <stdio.h>
 
 GEMPage pageButtons("Choose button to edit", pageRoot);

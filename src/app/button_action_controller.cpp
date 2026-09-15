@@ -1,6 +1,6 @@
 #include "button_action_controller.h"
 #include "../hal/buttons.h"
-#include "Arduino.h"
+#include <Arduino.h>
 #include "hal/leds.h"
 
 byte buttonIndex;

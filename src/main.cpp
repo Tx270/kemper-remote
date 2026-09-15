@@ -1,8 +1,10 @@
 #include <Arduino.h>
+#include "config.h"
 #include "app/settings_controller.h"
+#include "app/button_action_controller.h"
 #include "hal/display_driver.h"
 #include "hal/buttons.h"
-#include "app/button_action_controller.h"
+#include "hal/leds.h"
 #include "menu/menu_core.h"
 #include "menu/menu_root.h"
 #include "menu/menu_buttons.h"
@@ -12,20 +14,27 @@ void setup() {
     Serial.begin(115200);
     while (!Serial) { delay(10); }
 
-    displayDriver_init(); // setup screen
     buttons_init();
 
-    // GEM menu setup
-    buttonPages_init();   // builds pageButtonEdit[0..NUM_BUTTONS-1]
-    buttonsMenu_init();   // links to each pageButtonEdit[i]
-    rootMenu_init();      // links to pageButtons
-    menuCore_init();      // actual menu logic and drawing
+    if (HAS_DISPLAY) {
+        // setup screen
+        displayDriver_init();
+        // setup GEM menu
+        buttonPages_init();   // builds pageButtonEdit[0..NUM_BUTTONS-1]
+        buttonsMenu_init();   // links to each pageButtonEdit[i]
+        rootMenu_init();      // links to pageButtons
+        menuCore_init();      // actual menu logic and drawing
+    }
+
+    if (HAS_LEDS) {
+        leds_init();
+    }
     
-    // disable or enable wifi
+    // init wifi based on saved appState
     settingsController_onEnableWifiChanged();
 }
 
 void loop() {
-    menuCore_update();    // all ui updates
-    buttons_update();     // reading foot buttons
+    if (HAS_DISPLAY) menuCore_update();    // all ui updates
+    buttons_update();                      // reading foot buttons
 }
