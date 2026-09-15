@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include "hal/display_driver.h"
+#include "hal/buttons.h"
+#include "app/button_action_controller.h"
 #include "menu/menu_core.h"
 #include "menu/menu_root.h"
 #include "menu/menu_buttons.h"
@@ -10,6 +12,7 @@ void setup() {
     while (!Serial) { delay(10); }
 
     displayDriver_init(); // setup screen
+    buttons_init();
 
     // GEM menu setup
     buttonPages_init();   // builds pageButtonEdit[0..NUM_BUTTONS-1]
@@ -19,5 +22,6 @@ void setup() {
 }
 
 void loop() {
-    menuCore_update();
+    menuCore_update();    // all ui updates
+    buttons_update();     // reading foot buttons
 }

@@ -1,7 +1,5 @@
 #pragma once
-#include <Arduino.h>
-
-constexpr byte NUM_BUTTONS = 1;
+#include "../hal/pins.h"
 
 struct ButtonConfig {
     byte functionIndex  = 0;
