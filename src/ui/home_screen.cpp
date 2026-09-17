@@ -7,7 +7,7 @@ void homeScreen_draw() {
     u8g2.clearBuffer();
 
     u8g2.setFont(u8g2_font_ncenB08_tr);
-    u8g2.drawStr(0, 12, "Example");
+    u8g2.drawStr(0, 12, appState.rigName);
 
     u8g2.setFont(u8g2_font_6x10_tr);
     char line[32];

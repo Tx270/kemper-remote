@@ -7,12 +7,11 @@
 GEMPage* pageButtonEdit[NUM_BUTTONS];
 
 static SelectOptionByte functionOptions[] = {
-    {"None",   0},
-    {"Delay",  1},
-    {"Gain",   2},
-    {"Looper", 3}
+    {"None",           BTN_FUNC_NONE},
+    {"Program Change", BTN_FUNC_PROGRAM_CHANGE},
+    {"Control Change", BTN_FUNC_CONTROL_CHANGE}
 };
-static GEMSelect selectFunction(sizeof(functionOptions) / sizeof(SelectOptionByte), functionOptions);
+GEMSelect selectFunc(sizeof(functionOptions) / sizeof(SelectOptionByte), functionOptions);
 
 static char pageTitle[NUM_BUTTONS][20];
 
@@ -22,7 +21,7 @@ void buttonPages_init() {
 
         pageButtonEdit[i] = new GEMPage(pageTitle[i], pageButtons);
 
-        GEMItem* itemFunction = new GEMItem("Function", appState.buttons[i].functionIndex, selectFunction, buttonsMenuController_onFunctionChanged, i);
+        GEMItem* itemFunction = new GEMItem("Function", appState.buttons[i].function, selectFunc, buttonsMenuController_onFunctionChanged, i);
         GEMItem* itemMomentary = new GEMItem("Momentary", appState.buttons[i].momentary, buttonsMenuController_onMomentaryChanged, i);
         GEMItem* itemTime = new GEMItem("Time", appState.buttons[i].time, buttonsMenuController_onTimeChanged, i);
 

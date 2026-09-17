@@ -9,12 +9,16 @@
 #include "menu/menu_root.h"
 #include "menu/menu_buttons.h"
 #include "menu/menu_button_page.h"
+#include "midi/midi_state_machine.h"
+#include "midi/midi_transport.h"
 
 void setup() {
     Serial.begin(115200);
     while (!Serial) { delay(10); }
 
     buttons_init();
+    midiSM_init();    // midi state mashine
+    settingsController_onEnableWifiChanged(); // init wifi based on saved appState
 
     if (HAS_DISPLAY) {
         // setup screen
@@ -26,15 +30,12 @@ void setup() {
         menuCore_init();      // actual menu logic and drawing
     }
 
-    if (HAS_LEDS) {
-        leds_init();
-    }
-    
-    // init wifi based on saved appState
-    settingsController_onEnableWifiChanged();
+    if (HAS_LEDS) leds_init();
 }
 
 void loop() {
+    midiTransport_read();                  // read incoming midi
+    midiSM_update();                       // update midi state mashine
     if (HAS_DISPLAY) menuCore_update();    // all ui updates
     buttons_update();                      // reading foot buttons
 }

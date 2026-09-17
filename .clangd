@@ -3,4 +3,24 @@ CompileFlags:
     - "-mlongcalls"
     - "-fstrict-volatile-bitfields"
     - "-fno-tree-switch-conversion"
+    - "-mdisable-hardware-atomics"
+    - "-I/usr/include"
+    - "-I/usr/include/**"
+    - "-I/usr/local/include"
+  Add:
     - "--target=xtensa-esp32s3-elf"
+    - "-nostdinc"
+    - "-D__mode__(x)="
+    - "-D__TC__=SF"
+    - "-D__float128=double"
+    - "-D__GLIBC_USE(F)=0"
+    - "-isystem/home/tx27/.platformio/packages/toolchain-xtensa-esp32s3/xtensa-esp32s3-elf/sys-include"
+    - "-isystem/home/tx27/.platformio/packages/toolchain-xtensa-esp32s3/xtensa-esp32s3-elf/include"
+
+Diagnostics:
+  Suppress:
+    - "pp_expr_bad_token_lparen"
+    - "pp_file_not_found"
+    - "type_unsupported"
+    - "machine_mode"
+    - "unknown-argument"

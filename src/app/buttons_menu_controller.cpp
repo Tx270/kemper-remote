@@ -8,7 +8,7 @@ void buttonsMenuController_onFunctionChanged(GEMCallbackData callbackData) {
     Serial.print(F("Button "));
     Serial.print(idx + 1);
     Serial.print(F(" function set to: "));
-    Serial.println(appState.buttons[idx].functionIndex);
+    Serial.println(appState.buttons[idx].function);
 }
 
 void buttonsMenuController_onMomentaryChanged(GEMCallbackData callbackData) {
