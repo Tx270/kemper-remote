@@ -1,4 +1,5 @@
 #include "settings_controller.h"
+#include "app/settings_store.h"
 #include "app_state.h"
 #include "hal/leds.h"
 #include <Arduino.h>
@@ -6,22 +7,25 @@
 
 void settingsController_onBrightnessChanged() {
     leds_setBrightness(appState.settings.brightness);
-    Serial.print(F("Brightness set to: "));
-    Serial.println(appState.settings.brightness);
+
+    settingsStore_save();
 }
 
 void settingsController_onEnableWifiChanged() {
     if (appState.settings.enableWifi) {
-        WiFi.mode(WIFI_AP_STA);
+        WiFi.mode(WIFI_AP);
+        // WiFi.begin("kemper-remote", "esp32");
     } else {
         WiFi.disconnect(true);
         WiFi.mode(WIFI_OFF);
     }
-    Serial.print(F("Wifi set to: "));
-    Serial.println(appState.settings.enableWifi);
+
+    settingsStore_save();
 }
 
 void settingsController_onAcceptUpdatesChanged() {
     Serial.print(F("Updates set to: "));
     Serial.println(appState.settings.acceptUpdates);
+
+    settingsStore_save();
 }

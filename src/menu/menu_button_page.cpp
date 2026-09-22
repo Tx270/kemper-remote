@@ -2,6 +2,7 @@
 #include "menu_button_page.h"
 #include "app/app_state.h"
 #include "app/button_functions.h"
+#include "app/settings_store.h"
 #include "hal/leds.h"
 #include "menu_buttons.h"
 #include "menu_core.h"
@@ -23,6 +24,7 @@ static void onFunctionSelected(GEMCallbackData callbackData) {
     byte functionIndex = packed & 0xFF;
 
     appState.settings.buttonsFunctions[buttonIndex] = functionIndex;
+    settingsStore_save();
 
     leds_set(buttonIndex, dimColor(BUTTON_FUNCTIONS[functionIndex].color, 10));
     menuCore_homescreen();

@@ -17,7 +17,7 @@ struct MidiCommand {
 };
 
 struct MidiResponse {
-    char text[24];
+    char text[255];
     byte value;
     bool valid;       // false if the reply was garbled
 };

@@ -1,10 +1,14 @@
 #include <Arduino.h>
+#include "WiFi.h"
+#include "app/app_state.h"
+#include "app/settings_store.h"
 #include "config.h"
 #include "app/settings_controller.h"
 #include "app/button_action_controller.h"
 #include "hal/display_driver.h"
 #include "hal/buttons.h"
 #include "hal/leds.h"
+#include "hal/storage.h"
 #include "menu/menu_core.h"
 #include "menu/menu_root.h"
 #include "menu/menu_buttons.h"
@@ -16,9 +20,19 @@ void setup() {
     Serial.begin(115200);
     while (!Serial) { delay(10); }
 
+    if (HAS_LEDS) leds_init();
+
+    storage_init();                                 // mount LittleFS
+    settingsStore_load();
+    
     buttons_init();
-    midiSM_init();    // midi state mashine
-    settingsController_onEnableWifiChanged(); // init wifi based on saved appState
+    midiSM_init();                                  // midi state mashine
+
+    if (appState.settings.enableWifi) {
+        settingsController_onEnableWifiChanged();   // init wifi based on saved appState
+    } else {    
+        WiFi.mode(WIFI_OFF);
+    }
 
     if (HAS_DISPLAY) {
         // setup screen
@@ -29,8 +43,6 @@ void setup() {
         rootMenu_init();      // links to pageButtons
         menuCore_init();      // actual menu logic and drawing
     }
-
-    if (HAS_LEDS) leds_init();
 }
 
 void loop() {

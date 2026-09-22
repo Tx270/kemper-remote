@@ -11,7 +11,7 @@ struct Settings {
 struct AppState {
     Settings settings;   // saved to /settings.dat
 
-    char rigName[24]   = "Not connected";
+    char rigName[255]  = "Not connected";
     bool midiConnected = false;
 };
 
