@@ -5,3 +5,4 @@ extern GEM_u8g2 gem;
 
 void menuCore_init();
 void menuCore_update();
+void menuCore_homescreen();

@@ -14,14 +14,18 @@ static UiState uiState = UI_HOME;
 static unsigned long lastActivityTime = 0;
 static unsigned long lastHomeDraw = 0;
 
+void menuCore_homescreen() {
+    uiState = UI_HOME;
+    lastActivityTime = millis();
+    homeScreen_draw();      
+}
+
 void menuCore_init() {
     gem.setSplashDelay(0);
     gem.init();
     gem.invertKeysDuringEdit(true); // invert input for rotary encoder
 
-    uiState = UI_HOME;
-    lastActivityTime = millis();
-    homeScreen_draw();
+    menuCore_homescreen();
 }
 
 void menuCore_update() {
@@ -46,20 +50,18 @@ void menuCore_update() {
             pageRoot.setCurrentMenuItemIndex(0);
             gem.drawMenu();
         } else if (key == GEM_KEY_CANCEL && gem.getCurrentMenuPage() == &pageRoot && !gem.isEditMode()) {
-            uiState = UI_HOME;
-            homeScreen_draw();      
+            menuCore_homescreen();
         } else {
             gem.registerKeyPress(key);
         }
     }
 
     if (uiState == UI_MENU && (now - lastActivityTime >= MENU_TIMEOUT_MS)) {
-        uiState = UI_HOME;
-        homeScreen_draw();
+        menuCore_homescreen();
     }
 
-    // will query kemper for info to display
-    if (uiState == UI_HOME && now - lastHomeDraw >= 500) {
+    // update home screen
+    if (uiState == UI_HOME && now - lastHomeDraw >= 100) {
         lastHomeDraw = now;
         homeScreen_draw();
     }
