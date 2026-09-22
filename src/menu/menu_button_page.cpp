@@ -1,21 +1,27 @@
 #include "menu_button_page.h"
 #include "app/app_state.h"
+#include "app/button_functions.h"
 #include "app/buttons_menu_controller.h"
 #include "menu_buttons.h"
 #include <stdio.h>
 
 GEMPage* pageButtonEdit[NUM_BUTTONS];
 
-static SelectOptionByte functionOptions[] = {
-    {"None",           BTN_FUNC_NONE},
-    {"Program Change", BTN_FUNC_PROGRAM_CHANGE},
-    {"Control Change", BTN_FUNC_CONTROL_CHANGE}
-};
-GEMSelect selectFunc(sizeof(functionOptions) / sizeof(SelectOptionByte), functionOptions);
+static SelectOptionByte functionOptions[BUTTON_FUNCTION_COUNT];
+
+static GEMSelect selectFunc(BUTTON_FUNCTION_COUNT, functionOptions);
 
 static char pageTitle[NUM_BUTTONS][20];
 
+static void initFunctionOptions() {
+    for (byte i = 0; i < BUTTON_FUNCTION_COUNT; i++) {
+        functionOptions[i] = { BUTTON_FUNCTIONS[i].name, i };
+    }
+}
+
 void buttonPages_init() {
+    initFunctionOptions();
+
     for (byte i = 0; i < NUM_BUTTONS; i++) {
         snprintf(pageTitle[i], sizeof(pageTitle[i]), "Editing button %d", i + 1);
 

@@ -3,6 +3,14 @@
 
 void leds_init();
 
-void leds_set(byte index, byte red, byte green, byte blue);
-void leds_setAll(byte red, byte green, byte blue);
+struct Color {
+    byte red;
+    byte green;
+    byte blue;
+};
+
+Color dimColor(Color color, byte percent);
+
+void leds_set(byte index, Color color);
+void leds_setAll(Color color);
 void leds_setBrightness(byte brightness);

@@ -17,7 +17,7 @@ void leds_init() {
     leds.show();
 }
 
-void leds_set(byte index, byte red, byte green, byte blue)
+void leds_set(byte index, Color color)
 {
     if (!HAS_LEDS) return;
     
@@ -25,16 +25,16 @@ void leds_set(byte index, byte red, byte green, byte blue)
         return;
     }
 
-    leds.setPixelColor(index, leds.Color(red, green, blue));
+    leds.setPixelColor(index, leds.Color(color.red, color.green, color.blue));
     leds.show();
 }
 
-void leds_setAll(byte red, byte green, byte blue)
+void leds_setAll(Color color)
 {
     if (!HAS_LEDS) return;
     
     for (byte i = 0; i < NUM_LEDS; i++) {
-        leds.setPixelColor(i, leds.Color(red, green, blue));
+        leds.setPixelColor(i, leds.Color(color.red, color.green, color.blue));
     }
 
     leds.show();
@@ -45,4 +45,12 @@ void leds_setBrightness(byte brightness){
     
     leds.setBrightness(brightness);
     leds.show();
+}
+
+Color dimColor(Color color, byte percent) {
+    color.red   = (color.red   * percent) / 100;
+    color.green = (color.green * percent) / 100;
+    color.blue  = (color.blue  * percent) / 100;
+
+    return color;
 }

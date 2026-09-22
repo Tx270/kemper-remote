@@ -58,7 +58,7 @@ void midiSM_update() {
         }
 
         case STATE_SENDING:        tickSending();        break;
-        case STATE_AWAITING_REPLY: tickAwaitingReply(); break;
+        case STATE_AWAITING_REPLY: tickAwaitingReply();  break;
         case STATE_PARSING:        tickParsing();        break;
         case STATE_ERROR:          tickError();          break;
     }
@@ -72,6 +72,10 @@ static void enterSending(const MidiCommand& cmd) {
 
 static void tickSending() {
     switch (currentCmd.type) {
+
+        case MIDI_CMD_NONE:
+            state = STATE_IDLE;
+            return;
 
         case MIDI_CMD_PROGRAM_CHANGE:
             midiTransport_sendProgramChange(currentCmd.data1, currentCmd.channel);

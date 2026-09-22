@@ -1,14 +1,8 @@
 #pragma once
 #include "config.h"
 
-enum ButtonFunctionOptions : byte {
-    BTN_FUNC_NONE           = 0,
-    BTN_FUNC_PROGRAM_CHANGE = 1,
-    BTN_FUNC_CONTROL_CHANGE = 2
-};
-
 struct ButtonConfig {
-    byte function       = BTN_FUNC_NONE;
+    byte function       = 0;
     bool momentary      = false;
     byte time           = 0;
 };

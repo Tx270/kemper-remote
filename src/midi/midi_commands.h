@@ -2,10 +2,11 @@
 #include <Arduino.h>
 
 enum MidiCommandType : byte {
-    MIDI_CMD_PROGRAM_CHANGE    = 0,
-    MIDI_CMD_CONTROL_CHANGE    = 1,
-    MIDI_CMD_SYSEX_RIG_NAME    = 2,  // sends a request, expects a reply
-    // MIDI_CMD_SYSEX_TEMPO     = 3,  // future example
+    MIDI_CMD_NONE              = 0,
+    MIDI_CMD_PROGRAM_CHANGE    = 1,
+    MIDI_CMD_CONTROL_CHANGE    = 2,
+    MIDI_CMD_SYSEX_RIG_NAME    = 3,  // sends a request, expects a reply
+    // MIDI_CMD_SYSEX_TEMPO    = 4  // future example
 };
 
 struct MidiCommand {
