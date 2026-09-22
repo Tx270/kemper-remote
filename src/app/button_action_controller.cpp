@@ -17,7 +17,7 @@ static unsigned long pressStartTime[NUM_BUTTONS];
 void buttons_update() {
     if (!buttons_poll(buttonIndex, buttonState)) return;
 
-    ButtonFunction function = BUTTON_FUNCTIONS[appState.buttonsFunctions[buttonIndex]];
+    ButtonFunction function = BUTTON_FUNCTIONS[appState.settings.buttonsFunctions[buttonIndex]];
 
     if (buttonState) {
         // --- Press ---

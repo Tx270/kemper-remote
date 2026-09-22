@@ -12,7 +12,7 @@ Adafruit_NeoPixel leds(
 
 void leds_init() {
     leds.begin();
-    leds.setBrightness(appState.brightness);
+    leds.setBrightness(appState.settings.brightness);
     leds.clear();
     leds.show();
 }

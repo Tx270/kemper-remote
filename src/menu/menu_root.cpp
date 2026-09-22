@@ -7,9 +7,9 @@
 GEMPage pageRoot("Settings");
 
 GEMItem itemGoButtons("Edit Buttons", pageButtons);
-GEMItem itemWifi("WiFi", appState.enableWifi, settingsController_onEnableWifiChanged);
-GEMItem itemUpdates("Updates", appState.acceptUpdates, settingsController_onAcceptUpdatesChanged);
-GEMItem itemBrightness("Brightness", appState.brightness, settingsController_onBrightnessChanged);
+GEMItem itemWifi("WiFi", appState.settings.enableWifi, settingsController_onEnableWifiChanged);
+GEMItem itemUpdates("Updates", appState.settings.acceptUpdates, settingsController_onAcceptUpdatesChanged);
+GEMItem itemBrightness("Brightness", appState.settings.brightness, settingsController_onBrightnessChanged);
 
 void rootMenu_init() {
     pageRoot.addMenuItem(itemGoButtons);

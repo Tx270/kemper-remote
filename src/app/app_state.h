@@ -1,15 +1,18 @@
 #pragma once
 #include "config.h"
 
-struct AppState {
-    byte buttonsFunctions[NUM_BUTTONS];
-
+struct Settings {
+    byte buttonsFunctions[NUM_BUTTONS] = {0};
     byte brightness    = 50;
     bool acceptUpdates = false;
     bool enableWifi    = false;
+};
 
-    char rigName[24]      = "Not connected";
-    bool midiConnected    = false;
+struct AppState {
+    Settings settings;   // saved to /settings.dat
+
+    char rigName[24]   = "Not connected";
+    bool midiConnected = false;
 };
 
 extern AppState appState;

@@ -22,7 +22,7 @@ static void onFunctionSelected(GEMCallbackData callbackData) {
     byte buttonIndex   = (packed >> 8) & 0xFF;
     byte functionIndex = packed & 0xFF;
 
-    appState.buttonsFunctions[buttonIndex] = functionIndex;
+    appState.settings.buttonsFunctions[buttonIndex] = functionIndex;
 
     leds_set(buttonIndex, dimColor(BUTTON_FUNCTIONS[functionIndex].color, 10));
     menuCore_homescreen();
